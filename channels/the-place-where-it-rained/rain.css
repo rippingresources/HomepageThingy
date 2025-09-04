@@ -20,5 +20,5 @@ body {
 }
 
 #bgm {
-    display: none;
+    visibility: hidden;
 }
