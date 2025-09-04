@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf8">
+        <title>Discord | #the-place | Ripping Resources</title>
         <!-- Primary Meta Tags -->
         <meta property="og:title" content="#the-place-where-it-rained">
         <meta property="og:description" content="70. The place where it rained">
@@ -31,7 +32,7 @@
         <link rel="icon" type="image/png" href="/assets/Images/Favicons/favicon_64.png" sizes="64x64" />
         <!--link rel="icon" type="image/svg+xml" href="/assets/Images/Favicons/favicon.svg" /-->
         <link rel="shortcut icon" href="/favicon.ico" />
-        <title>Ripping Resources</title>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://www.youtube.com/iframe_api"></script>
         <script src="./rainManager.js" type="module"></script>
@@ -49,7 +50,6 @@
         };
 
         function onYouTubeIframeAPIReady() {
-            console.log('ready')
             player = new YT.Player('player', {
                 height: '1',
                 width: '1',
@@ -67,20 +67,31 @@
             });
         }
 
+        //A bit messy
         async function onPlayerReady(event) {
-            $("html").click(async function(){
-                if (!hasClickedEver) {
-                    hasClickedEver = true;
-                    playing = !playing;
-                    event.target.setVolume(0);
-                    event.target.playVideo();
-
-                    for (let i = 0; i <= 100; i++) {
-                        event.target.setVolume(i);
-                        await sleep(2000);
+            $(document).ready(function(){
+                $("html").click(async function(){
+                    if (!hasClickedEver) {
+                        hasClickedEver = true;
+                        playing = !playing;
+                        event.target.setVolume(0);
+                        event.target.playVideo();
+                        updateTitle();
+                        for (let i = 0; i <= 100; i++) {
+                            event.target.setVolume(i);
+                            await sleep(2000);
+                        }
                     }
-                }
+                });
             });
+        }
+
+        async function updateTitle() {
+            let textToAppend = '-where-it-rained'
+            for (let i = 0; i < textToAppend.length; i++) {
+                $("title").text(`Discord | #the-place${textToAppend.substring(0, i)} | Ripping Resources`);
+                await sleep(300);
+            }
         }
         </script>
     </head>
