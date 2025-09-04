@@ -1,0 +1,20 @@
+#rain {
+    z-index: 2;
+    position: fixed;
+    opacity: 0.4;
+    background: transparent;
+}
+
+#rain img {
+    position: fixed;
+    top: -44px;
+    left: -22px;
+    image-rendering: pixelated;
+    scale: 2;
+    mix-blend-mode: multiply;
+    transition: top 0.12s linear, left 0.12s linear;
+}
+
+#bgm {
+    display: none;
+}
