@@ -34,22 +34,21 @@ async function darkenMainColor() {
 
 async function removeMeWhenIGetToTheBottom(rain) {
     var removed = false;
-    var top = -44
-    var left = -22
-    var sleepTime = Math.floor(Math.random()*41)+25
+    //var top = -44
+    //var left = -22
+    let maxHeight = window.innerHeight;
+    await sleep(1000);
+    rain.style.top = `${50+window.innerHeight}px`
+    rain.style.left = `${50+window.innerHeight/2}px`
+    rain.style.transition = `top ${window.innerHeight/500}s linear, left ${window.innerHeight/500}s linear`;
 
     while (!removed) {
         let yPos = Number(window.getComputedStyle(rain).top.replace("px", ""))
-        if (window.innerHeight <= yPos) {
+        if ( maxHeight <= yPos || maxHeight != window.innerHeight) {
             rain.remove();
             removed = true;
-        } else {
-            top += 30
-            left += 1
-            rain.style.top = `${top}px`
-            rain.style.left = `${top}px`
-        };
-        await sleep(sleepTime);
+        }
+        await sleep(1000);
     }
 
 }
@@ -61,7 +60,7 @@ async function rain() {
     let doRain = true;
 
     while (doRain) {
-        if (rainContainer.children.length < 100) {
+        if (rainContainer.children.length <= 200) {
             const numb = Math.floor(Math.random()*9);
             const offset = Math.floor(Math.random()*200)-100;
             const img = document.createElement('img');
@@ -71,6 +70,6 @@ async function rain() {
             removeMeWhenIGetToTheBottom(img);
         }
 
-        await sleep(Math.random()*21);
+        await sleep(Math.random()*41);
     }
 }

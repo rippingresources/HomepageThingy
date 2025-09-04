@@ -16,7 +16,7 @@ body {
     image-rendering: pixelated;
     scale: 2;
     mix-blend-mode: multiply;
-    transition: top 0.12s linear, left 0.12s linear;
+    transition: top 5s linear, left 5s linear;
 }
 
 #bgm {
