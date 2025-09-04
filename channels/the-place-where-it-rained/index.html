@@ -33,18 +33,61 @@
         <link rel="shortcut icon" href="/favicon.ico" />
         <title>Ripping Resources</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!--script src="https://www.youtube.com/iframe_api"></script-->
-        <script src="./audioManager.js" type="module"></script>
+        <script src="https://www.youtube.com/iframe_api"></script>
         <script src="./rainManager.js" type="module"></script>
         <link href="https://fonts.googleapis.com/css2?family=Freckle+Face&display=swap"" rel="stylesheet">
         <link rel="stylesheet" href="/assets/CSS/style.css">
         <link rel="stylesheet" href="./rain.css">
+
+        <script>
+        let hasClickedEver = false
+        let playing = false
+        var player;
+
+        const sleep = (milliseconds) => {
+            return new Promise(resolve => setTimeout(resolve, milliseconds));
+        };
+
+        function onYouTubeIframeAPIReady() {
+            console.log('ready')
+            player = new YT.Player('player', {
+                height: '1',
+                width: '1',
+                videoId: 'aSc7Yuwn1Ao',
+                playerVars: {
+                    'playsinline': 1,
+                    'controls': 0,
+                    'loop': 1,
+                    'disablekb': 1,
+                    'playlist': 'aSc7Yuwn1Ao'
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                }
+            });
+        }
+
+        async function onPlayerReady(event) {
+            $("html").click(async function(){
+                if (!hasClickedEver) {
+                    hasClickedEver = true;
+                    playing = !playing;
+                    event.target.setVolume(0);
+                    event.target.playVideo();
+
+                    for (let i = 0; i <= 100; i++) {
+                        event.target.setVolume(i);
+                        await sleep(2000);
+                    }
+                }
+            });
+        }
+        </script>
     </head>
     <body>
         <img class="silhouette-img" src="/assets/Images/Meat.png"></div>
         <div id="scanlines" class="background-pattern"></div>
-        <iframe id="bgm" width="1" height="1" src="" frameborder="0" allowfullscreen></iframe>
-        </audio>
+        <div id="player"></div>
         <h1>Ripping Resources</h1>
         <div id="rain" class="background-pattern"><img src="./spr_lw_rain_style_b/5.png"></img></div>
     </body>

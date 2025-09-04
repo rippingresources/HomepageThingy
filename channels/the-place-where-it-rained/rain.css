@@ -19,6 +19,6 @@ body {
     transition: top 5s linear, left 5s linear;
 }
 
-#bgm {
+#player {
     visibility: hidden;
 }
