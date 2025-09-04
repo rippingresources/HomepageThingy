@@ -13,6 +13,7 @@ $(document).ready(function(){
         if (!hasClickedEver) {
             hasClickedEver = true
             playing = !playing
+            darkenMainColor()
             rain()
 
         }
@@ -22,6 +23,14 @@ $(document).ready(function(){
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
 };
+
+async function darkenMainColor() {
+    let base = ""
+    for (let i = 0; i < 30; i+= 0.1) {
+        document.querySelector(':root').style.setProperty('--main-color', `hsl(from #3135FC h s calc(l - ${i}))`);
+        await sleep(50);
+    }
+}
 
 async function removeMeWhenIGetToTheBottom(rain) {
     var removed = false;
