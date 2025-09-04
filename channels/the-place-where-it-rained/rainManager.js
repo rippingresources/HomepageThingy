@@ -54,19 +54,22 @@ async function removeMeWhenIGetToTheBottom(rain) {
 
 }
 
+// Do not let me code at 1 in the morning
+// This will cause a stupid amount of DOM updates. TODO: reuse old rain elements
 async function rain() {
     const rainContainer = $("#rain")[0];
     let doRain = true;
 
     while (doRain) {
-        const numb = Math.floor(Math.random()*9);
-        const offset = Math.floor(Math.random()*200)-100;
-        const img = document.createElement('img');
-        img.setAttribute('src', `./spr_lw_rain_style_b/${numb}.png`);
-        img.style.transform = `translateX(${offset}vw)`;
-        rainContainer.append(img);
-        removeMeWhenIGetToTheBottom(img);
-
+        if (rainContainer.children.length < 100) {
+            const numb = Math.floor(Math.random()*9);
+            const offset = Math.floor(Math.random()*200)-100;
+            const img = document.createElement('img');
+            img.setAttribute('src', `./spr_lw_rain_style_b/${numb}.png`);
+            img.style.transform = `translateX(${offset}vw)`;
+            rainContainer.append(img);
+            removeMeWhenIGetToTheBottom(img);
+        }
 
         await sleep(Math.random()*21);
     }
