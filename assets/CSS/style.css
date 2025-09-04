@@ -26,7 +26,7 @@ body {
 h1 {
 	font-family: 'Freckle Face', cursive;
 	text-align: center;
-	font-size: 10rem;
+	font-size: 10vw;
 	color: #ffffff;
 	text-shadow:
 		0 var(--title-shadow-distance) var(--title-shadow-blur) var(--title-shadow-color),
